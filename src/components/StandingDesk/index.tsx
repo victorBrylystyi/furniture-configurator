@@ -7,6 +7,8 @@ import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { useSnapshot } from 'valtio'
 import { state } from '../../store'
+import { useFrame } from '@react-three/fiber'
+import { useRef } from 'react'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -22,50 +24,89 @@ type GLTFResult = GLTF & {
 }
 
 const _c = new THREE.Color();
+let step = 0;
+let count = 0;
 
 export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
+  const feetRef = useRef<THREE.Mesh|null>(null);
+  const coverRef = useRef<THREE.Mesh|null>(null);
+  const displayRef = useRef<THREE.Mesh|null>(null);
   const { nodes, materials } = useGLTF('/models/standing_desk.glb') as GLTFResult;
-  const {tableCoverColor} = useSnapshot(state);
+  const {tableLegsColor} = useSnapshot(state);
+
+  useFrame((state) => {
+    if (feetRef) {
+      if (step === 0) {
+        // feetRef.current!.position.y += 0.001;
+        count += 0.001;
+        if (count >= 0.3) {
+          step = 1;
+        }
+      }
+      if (step === 1) {
+        // feetRef.current!.position.y -= 0.001;
+        count -= 0.001;
+        if (count <= 0) {
+          count = 0;
+          step = 0;
+        }
+      }
+      feetRef.current!.position.y = count;
+      coverRef.current!.position.y = count;
+      displayRef.current!.position.y = count;
+    }
+  })
 
   return (
     <group {...props} dispose={null}>
       <group name="Scene">
         <group name="upper_frame_low" userData={{ name: 'upper_frame_low' }}>
           <mesh
+            ref={feetRef}
             name="Cube018"
             castShadow
             receiveShadow
             geometry={nodes.Cube018.geometry}
             material={materials.main_body}
-          />
+          >
+            {/* <meshStandardMaterial color={'green'} /> */}
+          </mesh>
           <mesh
+            ref={displayRef}
             name="Cube018_1"
             castShadow
             receiveShadow
             geometry={nodes.Cube018_1.geometry}
-            material={materials.small_screen}
-          />
+            // material={materials.small_screen}
+          >
+            <meshStandardMaterial color={'blue'} />
+          </mesh>
         </group>
         <mesh
+          ref={coverRef}
           name="Desk_low"
           castShadow
           receiveShadow
           geometry={nodes.Desk_low.geometry}
-          // material={materials.main_body}
+          material={materials.main_body}
           userData={{ name: 'Desk_low' }}
         >
-          <meshStandardMaterial 
-            color={_c.setRGB(tableCoverColor.r/255, tableCoverColor.g/255, tableCoverColor.b/255, 'srgb')} 
-          />
+          {/* <meshStandardMaterial 
+            color={_c.setRGB(tableCoverColor.r/255, tableCoverColor.g/255, tableCoverColor.b/255, 'srgb').clone()} 
+          /> */}
         </mesh>
         <mesh
           name="feet_low"
           castShadow
           receiveShadow
           geometry={nodes.feet_low.geometry}
-          material={materials.main_body}
+          // material={materials.main_body}
           userData={{ name: 'feet_low' }}
-        />
+        >
+          <meshStandardMaterial 
+            color={_c.setRGB(tableLegsColor.r/255, tableLegsColor.g/255, tableLegsColor.b/255, 'srgb').clone()} 
+          />
+        </mesh>
       </group>
     </group>
   )
