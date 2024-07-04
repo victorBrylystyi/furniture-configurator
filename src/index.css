@@ -66,6 +66,10 @@ code {
 .pallete {
 
   width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
 
   border-radius: 3px;
@@ -75,4 +79,12 @@ code {
   border-radius: 20px;
   border:1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+  transition: 0.6s cubic-bezier(0.85, 0, 0.15, 1);
 }

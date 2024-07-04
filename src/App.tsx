@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { useRef } from "react";
 import { CanvasScene } from "./components/CanvasScene";
 import { SceneEnv } from "./components/SceneEnv";
-import { Overlay } from "./Overlay";
+import { Overlay } from "./components/Overlay";
 
 const App = () => {
 

@@ -33,7 +33,7 @@ export const CanvasScene = () => {
 
     return (
         <>
-            <ReflectionFloor />
+            {/* <ReflectionFloor /> */}
             <Suspense fallback={null}>
                 <StandingDesk />
             </Suspense>
