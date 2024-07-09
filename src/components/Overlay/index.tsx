@@ -48,7 +48,7 @@ export const Overlay = () => {
     return <>
         <div id="overlay">
             <div className="overlayHeader">
-                <button onClick={showHide}> Show/hide </button>
+                <button onClick={showHide}> Roll up </button>
                 <button> Download </button>
             </div>
             <div className="overlayContent"> 
