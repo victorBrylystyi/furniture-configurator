@@ -9,7 +9,7 @@ import { GLTF } from 'three-stdlib'
 import { useSnapshot } from 'valtio'
 import { state } from '../../store'
 import { useFrame } from '@react-three/fiber'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { MaterialTypes, TableHeightTypes } from '../../helpers/types'
 import { damp } from 'maath/easing'
 import { useTableTextures } from '../../hooks/useTableTextures'
@@ -63,29 +63,29 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
       switch (tableMaterial) {
         case MaterialTypes.default: 
         {
-          coverRefMaterial.color.setStyle(state.tableCoverColor, 'srgb');
-          coverRefMaterial.map = null;
-          coverRefMaterial.displacementMap = null;
-          coverRefMaterial.metalnessMap = null;
-          coverRefMaterial.normalMap = null;
-          coverRefMaterial.roughnessMap = null;
-          coverRefMaterial.needsUpdate = true;
+          // coverRefMaterial.color.setStyle(state.tableCoverColor, 'srgb');
+          // coverRefMaterial.map = null;
+          // coverRefMaterial.displacementMap = null;
+          // coverRefMaterial.metalnessMap = null;
+          // coverRefMaterial.normalMap = null;
+          // coverRefMaterial.roughnessMap = null;
+          // coverRefMaterial.needsUpdate = true;
         }
         break;
         case MaterialTypes.v1: 
         {
-          const [ colorMapV1, displMapV1, metalMapV1, normalMapV1, roughMapV1 ] = v1;
+          // const [ colorMapV1, displMapV1, metalMapV1, normalMapV1, roughMapV1 ] = v1;
 
-          console.log(v1, coverRef.current.clone())
+          // console.log(v1, coverRef.current.clone())
           
-          coverRefMaterial.color.setStyle(state.tableCoverColor, 'srgb');
-          coverRefMaterial.map = colorMapV1;
-          coverRefMaterial.displacementMap = displMapV1;
-          coverRefMaterial.metalnessMap = metalMapV1;
+          // coverRefMaterial.color.setStyle(state.tableCoverColor, 'srgb');
+          // coverRefMaterial.map = colorMapV1;
+          // // coverRefMaterial.displacementMap = displMapV1;
+          // coverRefMaterial.metalnessMap = metalMapV1;
 
-          coverRefMaterial.roughnessMap = roughMapV1;
-          coverRefMaterial.normalMap = normalMapV1;
-          coverRefMaterial.needsUpdate = true;
+          // coverRefMaterial.roughnessMap = roughMapV1;
+          // coverRefMaterial.normalMap = normalMapV1;
+          // coverRefMaterial.needsUpdate = true;
         }
         break;
         default:
@@ -98,16 +98,47 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
 
   useEffect(() => {
 
-    if (coverRef.current) {
+    if (coverRef.current && (state.materials === MaterialTypes.default)) {
 
       const coverRefMaterial = coverRef.current?.material as THREE.MeshStandardMaterial;
 
-      coverRefMaterial.color.setStyle(state.tableCoverColor, 'srgb');
+      coverRefMaterial.color.setStyle(tableCoverColor, 'srgb');
       coverRefMaterial.needsUpdate = true;
 
     }
 
   }, [tableCoverColor])
+
+  const getMaps = useCallback((type: string) => {
+    switch (tableMaterial) {
+      case MaterialTypes.default:
+      default:
+      {
+        return {
+          color: _c.setStyle(state.tableCoverColor, 'srgb').clone(),
+          map: null,
+          metalnessMap: null,
+          normalMap: null,
+          roughnessMap: null
+        }
+      }
+
+      case MaterialTypes.v1:
+      {
+        // const [ colorMapV1, displMapV1, metalMapV1, normalMapV1, roughMapV1 ] = v1;
+        const textures = type === "desk" ? v1[1] : v1[0]
+        return {
+          color: _c.setRGB(1,1,1,'srgb').clone(),
+          ...textures
+          // map: metal.map,
+          // metalnessMap: metal.metalness,
+          // normalMap: normalMapV1,
+          // roughnessMap: roughMapV1
+        }
+      }
+    
+    }
+  }, [tableMaterial, v1])
 
   useFrame((state, delta) => {
 
@@ -157,9 +188,13 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
             castShadow
             receiveShadow
             geometry={nodes.Cube018.geometry}
-            material={materials.main_body}
+            // material={materials.main_body}
           >
-            {/* <meshStandardMaterial color={'green'} /> */}
+            <meshStandardMaterial
+              {...getMaps('legs')} 
+              metalness={0.8}
+              roughness={0.1}
+            />
           </mesh>
           <mesh
             ref={displayRef}
@@ -185,7 +220,9 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
             // color={_c.setRGB(tableCoverColor.r/255, tableCoverColor.g/255, tableCoverColor.b/255, 'srgb').clone()} 
             color={_c.setStyle(tableCoverColor, 'srgb').clone()} 
           /> */}
-          <meshStandardMaterial />
+          <meshStandardMaterial 
+            {...getMaps('desk')}
+          />
         </mesh>
         <mesh
           name="feet_low"
