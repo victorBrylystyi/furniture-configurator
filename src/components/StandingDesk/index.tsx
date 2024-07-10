@@ -13,6 +13,7 @@ import { MaterialTypes, TableHeightTypes } from '../../helpers/types'
 import { state } from '../../store'
 import { useSnapshot } from 'valtio'
 import { useTableTextures } from '../../hooks/useTableTextures'
+import { TV } from '../TV'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -124,6 +125,11 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
             </mesh>
           </group>
           <group ref={dynamicRef} name="dynamic" userData={{ name: 'dynamic' }}>
+            <TV 
+                position={[0, 1.05, -0.3]} 
+                scale={[0.027, 0.027, 0.027]} 
+                rotation={[0, -Math.PI/2, 0]}
+            />
             <group name="controller" userData={{ name: 'controller' }}>
               <group name="controller_box" userData={{ name: 'controller_box' }}>
                     <mesh
