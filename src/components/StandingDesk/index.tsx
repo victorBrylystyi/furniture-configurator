@@ -48,7 +48,7 @@ const _c = new Color();
 export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
 
   const { nodes, materials } = useGLTF('/models/standing_desk2.glb') as GLTFResult;
-  const {tableLegsColor, tableCoverColor, materials: tableMaterial} = useSnapshot(state);
+  const { tableCoverColor, materials: tableMaterial} = useSnapshot(state);
 
   const dynamicRef = useRef<Group | null>(null);
 

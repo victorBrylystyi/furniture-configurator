@@ -1,38 +1,14 @@
-import { Box, Radio, Grid, RadioGroup, FormControlLabel, FormControl, InputLabel, SelectChangeEvent, MenuItem, Select, Button, Typography, FormLabel } from "@mui/material";
-import { EventHandler, useCallback, useEffect, useState } from "react";
+import { Box, Radio, RadioGroup, FormControlLabel, FormControl, InputLabel, SelectChangeEvent, MenuItem, Select, Button, FormLabel } from "@mui/material";
+import { useCallback } from "react";
 import { colors, state, updateTableCoverColor, updateTableHeight, updateTableMaterial } from "../../store";
 import { MaterialTypes, TableHeightTypes } from "../../helpers/types";
 import { useSnapshot } from "valtio";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
-
-
-let bit = false;
-
 export const Overlay = () => {
 
     const {tableHeight} = useSnapshot(state);
 
-    const showHide = useCallback(() => {
-        bit = !bit;
-        const overlay = document.getElementById('overlay');
-        const overlayContent = document.querySelector('.overlayContent') as HTMLElement;
-
-
-        if (overlay) {
-            if (bit) {
-                overlay.style.height = '100px';
-                overlayContent.style.display = 'none';
-
-            } else {
-                overlay.style.height = '500px';
-                overlayContent.style.display = 'block';
-            }
-        }
-
-
-
-    }, [])
 
     const handleRadio = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         updateTableHeight(event.target.value as TableHeightTypes);

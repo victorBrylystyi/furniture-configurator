@@ -101,16 +101,15 @@ export const TV = (props: JSX.IntrinsicElements['group']) => {
                 //   material={materials.Screen}
                 userData={{ name: 'display' }}
                 >
-                    <group position={[2, 20.8, 1.4]} rotation-y={Math.PI / 2}>
+                    {/* <group position={[2, 20.8, 1.4]} rotation-y={Math.PI / 2}> */}
                         <Html 
                             className="content"
                             scale={[2,2,1]} 
-                            // zIndexRange={[1, 1]} 
-                            // prepend 
+                            prepend 
                             transform 
-                            style={{
-                                zIndex: -2
-                            }}
+                            occlude
+                            position={[1.44, 20.8, 1.4]}
+                            rotation-y={Math.PI / 2}
                         >
                             <div 
                                 style={{
@@ -124,7 +123,7 @@ export const TV = (props: JSX.IntrinsicElements['group']) => {
                                 
                             </div>
                         </Html>
-                    </group>
+                    {/* </group> */}
                 </mesh>
             </group>
             </group>

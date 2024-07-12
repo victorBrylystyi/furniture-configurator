@@ -50,7 +50,7 @@ export const StandingDeskTest = (props: JSX.IntrinsicElements['group']) => {
   // const { v1 } = useTableTextures();
 
 
-  const {tableLegsColor, tableCoverColor, tableHeight, materials: tableMaterial} = useSnapshot(state);
+  const {tableCoverColor, tableHeight, materials: tableMaterial} = useSnapshot(state);
 
   // console.log(v1)
 

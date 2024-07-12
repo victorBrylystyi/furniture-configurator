@@ -18,6 +18,5 @@ export enum MaterialTypes {
 export type StoreType = {
     tableHeight: TableHeightTypes
     tableCoverColor: string
-    tableLegsColor: RGB
     materials: MaterialTypes
 }
