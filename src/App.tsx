@@ -10,7 +10,7 @@ const App = () => {
   const rootRef = useRef(document.getElementById('#root') as HTMLElement);
 
   return <>
-    <Canvas dpr={[1, 2]} camera={{ position: [0, 2.5, 2.5], fov: 75 }}>
+    <Canvas dpr={[1, 2]} camera={{ position: [0, 2.5, 2.5], fov: 30 }}>
       <OrbitControls target={[0,1,0]}  />
         <CanvasScene />
         <SceneEnv />

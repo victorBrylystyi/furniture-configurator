@@ -115,12 +115,11 @@ export const TV = (props: JSX.IntrinsicElements['group']) => {
                                 style={{
                                     width: '100%',
                                     height: '100%',
-                                    backgroundColor:'red'
+                                    // backgroundColor:'red'
                                 }} 
                                 onPointerDown={(e) => e.stopPropagation()}
                             >
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam labore, impedit eligendi nesciunt porro deleniti earum quaerat nihil delectus illum explicabo optio eius, praesentium odio at id cumque aperiam? Repellat.
-                                
+                                <iframe title="embed" width={'100%'} height={'100%'} src="https://docs.pmnd.rs/react-three-fiber/getting-started/examples" />
                             </div>
                         </Html>
                     {/* </group> */}
