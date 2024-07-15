@@ -1,4 +1,3 @@
-import { RGB } from "three"
 
 export enum TableHeightTypes {
     default = 'Default',

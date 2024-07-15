@@ -8,11 +8,6 @@ type TexturesType = {
     displacementMap?: string
 }
 
-type TexturesAssetsType = {
-    wood: TexturesType,
-    metal: TexturesType
-}
-
 export const useTableTextures = () => {
 
     const metalV1 = useTexture<TexturesType>({
