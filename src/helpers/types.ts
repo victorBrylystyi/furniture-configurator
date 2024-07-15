@@ -1,3 +1,4 @@
+import { WebGLRenderTarget } from "three"
 
 export enum TableHeightTypes {
     default = 'Default',
@@ -12,8 +13,15 @@ export enum MaterialTypes {
     v2 = 'v2'
 }
 
+export enum TVContentTypes {
+    html = 'HTML',
+    video = 'video',
+}
+
 export type StoreType = {
     tableHeight: TableHeightTypes
     tableCoverColor: string
     materials: MaterialTypes
+    rt: WebGLRenderTarget | null
+    tvContent: TVContentTypes
 }

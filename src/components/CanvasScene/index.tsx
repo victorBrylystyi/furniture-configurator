@@ -1,6 +1,9 @@
 import { MeshReflectorMaterial } from "@react-three/drei"
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import { StandingDesk } from "../StandingDesk"
+import { setRT, state } from "../../store"
+import { NearestFilter, RGBAFormat, WebGLRenderTarget } from "three"
+import { useThree } from "@react-three/fiber"
 
 
 const ReflectionFloor = () => {
@@ -30,6 +33,26 @@ const ReflectionFloor = () => {
 
 export const CanvasScene = () => {
 
+    const size = useThree(state => state.size);
+
+    useEffect(() => {
+  
+        if (state.rt) state.rt.dispose();
+
+        const newRT = new WebGLRenderTarget(size.width * window.devicePixelRatio, size.height * window.devicePixelRatio, {
+            minFilter: NearestFilter,
+            magFilter: NearestFilter,
+            generateMipmaps: false,
+            format: RGBAFormat,
+            depthBuffer: false,
+            colorSpace: 'srgb-linear',
+        });
+
+        // newRT.texture.flipY = false;
+
+        setRT(newRT);
+
+    }, [size])
 
     return (
         <>

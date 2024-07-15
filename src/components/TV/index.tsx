@@ -6,6 +6,9 @@ import * as THREE from 'three'
 import { useCallback } from 'react'
 import { Html, useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
+import { useSnapshot } from 'valtio'
+import { state } from '../../store'
+import { TVContentTypes } from '../../helpers/types'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -29,14 +32,16 @@ type GLTFResult = GLTF & {
 export const TV = (props: JSX.IntrinsicElements['group']) => {
 
     const { nodes } = useGLTF('/models/tv.glb') as GLTFResult;
+
+    const tvContentType = useSnapshot(state).tvContent;
+
     const getBoxMaterial = useCallback(() => (
         <meshStandardMaterial 
             color={'black'}
             roughness={0.8}
             metalness={0.2}
         />
-    ), [])
-
+    ), []);
 
     return (
         <group {...props} dispose={null}>
@@ -95,25 +100,47 @@ export const TV = (props: JSX.IntrinsicElements['group']) => {
                 geometry={nodes.display.geometry}
                 userData={{ name: 'display' }}
                 >
-                    <Html 
-                        className="content"
-                        scale={[2,2,1]} 
-                        prepend 
-                        transform 
-                        occlude
-                        position={[1.44, 20.8, 1.4]}
-                        rotation-y={Math.PI / 2}
-                    >
-                        <div 
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                            }} 
-                            onPointerDown={(e) => e.stopPropagation()}
-                        >
-                            <iframe title="embed" width={'100%'} height={'100%'} src="https://furniture-configurator.netlify.app/" />
-                        </div>
-                    </Html>
+                    {(() => {
+                        switch(tvContentType) {
+                            case TVContentTypes.html:
+                            return (
+                            <Html 
+                                className="content"
+                                scale={[2,2,1]} 
+                                prepend 
+                                transform 
+                                occlude
+                                position={[1.44, 20.8, 1.4]}
+                                rotation-y={Math.PI / 2}
+                            >
+                                <div 
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                    }} 
+                                    onPointerDown={(e) => e.stopPropagation()}
+                                >
+                                    <iframe 
+                                        title="embed" 
+                                        width={'100%'} 
+                                        height={'100%'} 
+                                        src="https://docs.pmnd.rs/react-three-fiber/getting-started/examples" 
+                                    />
+                                </div>
+                            </Html>
+                            )
+                            case TVContentTypes.video:
+                            return (
+                                <meshStandardMaterial 
+                                    metalness={0.7}
+                                    roughness={0.2}
+                                    displacementScale={0}
+                                />
+                            )
+                            default: 
+                            return null;
+                        }
+                    })()}
                 </mesh>
             </group>
             </group>

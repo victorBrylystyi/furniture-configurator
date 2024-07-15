@@ -1,30 +1,52 @@
-import { Box, Radio, RadioGroup, FormControlLabel, FormControl, InputLabel, SelectChangeEvent, MenuItem, Select, Button, FormLabel } from "@mui/material";
+import { Box, Radio, RadioGroup, FormControlLabel, FormControl, InputLabel, SelectChangeEvent, MenuItem, Select, Button, FormLabel, Switch } from "@mui/material";
 import { useCallback } from "react";
-import { colors, state, updateTableCoverColor, updateTableHeight, updateTableMaterial } from "../../store";
-import { MaterialTypes, TableHeightTypes } from "../../helpers/types";
+import { colors, state, updateTableCoverColor, updateTableHeight, updateTableMaterial, updateTVcontentType } from "../../store";
+import { MaterialTypes, TableHeightTypes, TVContentTypes } from "../../helpers/types";
 import { useSnapshot } from "valtio";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import { drawRT } from "../../helpers/utils";
+import { Color } from "three";
+import { R3FRef } from "../../store/R3FStore";
 
 export const Overlay = () => {
 
-    const {tableHeight} = useSnapshot(state);
-
+    const {tableHeight, tvContent} = useSnapshot(state);
 
     const handleRadio = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         updateTableHeight(event.target.value as TableHeightTypes);
     }, []);
 
-
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = useCallback((event: SelectChangeEvent) => {
       updateTableMaterial(event.target.value as MaterialTypes);
-    };
+    }, []);
 
+    const handleDownloadButton = useCallback(() => {
+
+        if (!state.rt || !R3FRef.current) return;
+
+        const {gl, scene, camera} = R3FRef.current.getState();
+        
+        gl.setRenderTarget(state.rt);
+
+        const c = new Color().setRGB(0.0, 0.0, 0.0, 'srgb-linear');
+        gl.setClearColor(c, 0.0);
+        gl.clearColor();
+    
+        gl.render( scene, camera );
+
+        gl.setRenderTarget(null);
+
+        drawRT(gl, state.rt, 'screenshot');
+
+    }, []);
+  
     return <>
         <div id="overlay">
             <div className="overlayHeader">
                 <Button 
                     variant="outlined" 
                     startIcon={<CameraAltIcon />}
+                    onClick={handleDownloadButton}
                 >
                     Download
                 </Button>
@@ -65,6 +87,14 @@ export const Overlay = () => {
                             <MenuItem value={MaterialTypes.v1}>Wood 1</MenuItem>
                             <MenuItem value={MaterialTypes.v2}>Wood 2</MenuItem>
                         </Select>
+                    </FormControl>
+                    <FormControl component="fieldset" sx={{marginTop: '10px'}}> 
+                        <FormControlLabel
+                            value={tvContent === TVContentTypes.video}
+                            control={<Switch color="primary" onChange={(e) => updateTVcontentType(e.target.checked)}/>}
+                            label="TV content"
+                            labelPlacement="end"
+                        />
                     </FormControl>
                 </Box>
             </div>
