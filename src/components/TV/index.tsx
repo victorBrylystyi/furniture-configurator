@@ -119,7 +119,7 @@ export const TV = (props: JSX.IntrinsicElements['group']) => {
                                 }} 
                                 onPointerDown={(e) => e.stopPropagation()}
                             >
-                                <iframe title="embed" width={'100%'} height={'100%'} src="https://app.netlify.com/teams/victorbrylystyi/sites" />
+                                <iframe title="embed" width={'100%'} height={'100%'} src="https://furniture-configurator.netlify.app/" />
                             </div>
                         </Html>
                     {/* </group> */}
