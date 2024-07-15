@@ -95,10 +95,8 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
     <>
         <meshStandardMaterial 
             color={'#353934'}
-            // displacementScale={0}
             roughness={0.3}
             metalness={0.9}
-            // {...plastic}
         />
     </>
   ), []);
@@ -114,7 +112,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
               castShadow
               receiveShadow
               geometry={nodes.feet_low.geometry}
-            //   material={materials.main_body}
               userData={{ name: 'feet_low' }}
             >
                 <meshStandardMaterial
@@ -137,7 +134,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                         castShadow
                         receiveShadow
                         geometry={nodes.Cube009.geometry}
-                        // material={materials.main_body}
                     >
                     {getPlastic()}
                     </mesh>
@@ -146,7 +142,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                         castShadow
                         receiveShadow
                         geometry={nodes.Cube009_1.geometry}
-                        // material={materials.small_screen}
                     >
                     {getPlastic()}
                     </mesh>
@@ -166,7 +161,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.motor_cable.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'motor_cable' }}
                 >
                     <meshStandardMaterial 
@@ -179,7 +173,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.controller_cable.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'controller_cable' }}
                 >
                     <meshStandardMaterial 
@@ -194,7 +187,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.upper_frame_low001.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'upper_frame_low.001' }}
                 >
                     {getMetal()}
@@ -204,7 +196,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.upper_frame_low004.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'upper_frame_low.004' }}
                 >
                    {getMetal()}
@@ -214,7 +205,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.upper_frame_low007.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'upper_frame_low.007' }}
                 >
                    {getMetal()}
@@ -224,7 +214,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.upper_frame_low008.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'upper_frame_low.008' }}
                 >
                    {getMetal()}
@@ -234,7 +223,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.upper_frame_low003.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'upper_frame_low.003' }}
                 >
                    {getMetal()}
@@ -244,7 +232,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.upper_frame_low002.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'upper_frame_low.002' }}
                 >
                     {getMetal()}
@@ -256,7 +243,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.Desk_low.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'Desk_low' }}
                 >
                     {getPlastic()}
@@ -266,7 +252,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.Desk_low001.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'Desk_low.001' }}
                 >
                     {getPlastic()}
@@ -276,7 +261,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.Desk_low002.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'Desk_low.002' }}
                 >
                     {(() => {
@@ -294,7 +278,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                             case MaterialTypes.v1:
                             return (
                                 <meshStandardMaterial 
-                                    // color={_c.setRGB(0,0,0,'srgb').clone()}
                                     color={tableCoverColor}
                                     metalness={0.7}
                                     roughness={0.2}
@@ -305,7 +288,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                             case MaterialTypes.v2:
                             return (
                                 <meshStandardMaterial 
-                                    // color={_c.setRGB(0,0,0,'srgb').clone()}
                                     color={tableCoverColor}
                                     metalness={0.3}
                                     roughness={0.8}
@@ -321,7 +303,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.Desk_low003.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'Desk_low.003' }}
                 >
                     {getPlastic()}
@@ -333,7 +314,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.upper_frame_low006.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'upper_frame_low.006' }}
                 >
                     {getPlastic()}
@@ -343,7 +323,6 @@ export const StandingDesk = (props: JSX.IntrinsicElements['group']) => {
                     castShadow
                     receiveShadow
                     geometry={nodes.upper_frame_low011.geometry}
-                    // material={materials.main_body}
                     userData={{ name: 'upper_frame_low.011' }}
                 >
                     {getPlastic()}

@@ -57,18 +57,13 @@ export const Overlay = () => {
                         <Select
                             labelId="demo-simple-select-standard-label"
                             id="demo-simple-select-standard"
-                            // value={MaterialTypes.default}
                             defaultValue={MaterialTypes.default}
                             onChange={handleChange}
                             label="Materials"
                         >
-                        {/* <MenuItem value="">
-                            <em>default</em>
-                        </MenuItem> */}
-                        <MenuItem value={MaterialTypes.default}>default</MenuItem>
-                        <MenuItem value={MaterialTypes.v1}>Wood 1</MenuItem>
-                        <MenuItem value={MaterialTypes.v2}>Wood 2</MenuItem>
-                        {/* <MenuItem value={30}>Thirty</MenuItem> */}
+                            <MenuItem value={MaterialTypes.default}>default</MenuItem>
+                            <MenuItem value={MaterialTypes.v1}>Wood 1</MenuItem>
+                            <MenuItem value={MaterialTypes.v2}>Wood 2</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
@@ -77,7 +72,6 @@ export const Overlay = () => {
         <div id="colorControll">
             <div className="pallete">
                 {colors.map((color, index) => (
-                    // <div key={color} className={`circle`} style={{ background: color }} onClick={() => (state.color = color)}></div>
                     <Box 
                         key={color + index} 
                         component="div" 
@@ -86,7 +80,6 @@ export const Overlay = () => {
                             background: color
                         }}
                         onClick={() => updateTableCoverColor(index)}
-
                     />
                 ))}
             </div>

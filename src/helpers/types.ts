@@ -9,9 +9,7 @@ export enum TableHeightTypes {
 export enum MaterialTypes {
     default = 'Default',
     v1 = 'v1',
-    v2 = 'v2',
-    // h2 = '200mm',
-    // h3 = '300mm',
+    v2 = 'v2'
 }
 
 export type StoreType = {
