@@ -10,11 +10,11 @@ export const state = proxy<StoreType>({
     tableHeight: TableHeightTypes.default,
     tableCoverColor: colors[0],
     rt: null,
-    tvContent: TVContentTypes.html
+    tvContent: TVContentTypes.video
 });
 
 export const updateTableHeight = (heightType: TableHeightTypes) => state.tableHeight = heightType;
 export const updateTableCoverColor= (colorIndex: number) => state.tableCoverColor = colors[colorIndex];
 export const updateTableMaterial= (type: MaterialTypes) => state.materials = type;
 export const setRT = (rt: WebGLRenderTarget) => state.rt = rt;
-export const updateTVcontentType = (status: boolean) => state.tvContent = status ? TVContentTypes.video : TVContentTypes.html;
+export const updateTVcontentType = (status: boolean) => state.tvContent = status ? TVContentTypes.html : TVContentTypes.video;
