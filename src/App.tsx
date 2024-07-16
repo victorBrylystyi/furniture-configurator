@@ -1,14 +1,9 @@
-import { Html, OrbitControls, Stats, useProgress } from "@react-three/drei";
+import { OrbitControls, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { CanvasScene } from "./components/CanvasScene";
 import { SceneEnv } from "./components/SceneEnv";
 import { Overlay } from "./components/Overlay";
-
-function Loader() {
-  const { progress } = useProgress()
-  return <Html center>{progress} % loaded</Html>
-}
 
 const App = () => {
 
@@ -24,7 +19,7 @@ const App = () => {
       camera={{ position: [0, 2.5, 2.5], fov: 30 }}
     >
       <OrbitControls target={[0, 1.2, 0]} maxDistance={20} minDistance={2} makeDefault />
-      <Suspense fallback={<Loader />}> 
+      <Suspense fallback={null}> 
         <CanvasScene />
         <SceneEnv />
       </Suspense>
