@@ -17,7 +17,7 @@ const App = () => {
       dpr={[1, 2]} 
       camera={{ position: [0, 2.5, 2.5], fov: 30 }}
     >
-      <OrbitControls target={[0,1,0]}  />
+      <OrbitControls target={[0,1,0]}  maxDistance={20} minDistance={2}/>
       <R3FStoreProvider />
       <CanvasScene />
       <SceneEnv />

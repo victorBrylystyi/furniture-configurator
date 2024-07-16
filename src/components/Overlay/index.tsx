@@ -4,8 +4,7 @@ import { colors, state, updateTableCoverColor, updateTableHeight, updateTableMat
 import { MaterialTypes, TableHeightTypes, TVContentTypes } from "../../helpers/types";
 import { useSnapshot } from "valtio";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import { drawRT } from "../../helpers/utils";
-import { Color } from "three";
+import { downloadScreenshot } from "../../helpers/utils";
 import { R3FRef } from "../../store/R3FStore";
 
 export const Overlay = () => {
@@ -22,21 +21,11 @@ export const Overlay = () => {
 
     const handleDownloadButton = useCallback(() => {
 
-        if (!state.rt || !R3FRef.current) return;
+        if (!R3FRef.current) return;
 
-        const {gl, scene, camera} = R3FRef.current.getState();
-        
-        gl.setRenderTarget(state.rt);
+        const { gl } = R3FRef.current.getState();
 
-        const c = new Color().setRGB(0.0, 0.0, 0.0, 'srgb-linear');
-        gl.setClearColor(c, 0.0);
-        gl.clearColor();
-    
-        gl.render( scene, camera );
-
-        gl.setRenderTarget(null);
-
-        drawRT(gl, state.rt, 'screenshot');
+        downloadScreenshot(gl.domElement);
 
     }, []);
   
