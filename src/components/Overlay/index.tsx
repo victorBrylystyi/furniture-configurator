@@ -1,7 +1,7 @@
 import { Box, Radio, RadioGroup, FormControlLabel, FormControl, InputLabel, SelectChangeEvent, MenuItem, Select, Button, FormLabel, Switch } from "@mui/material";
 import { useCallback } from "react";
-import { colors, state, updateTableCoverColor, updateTableHeight, updateTableMaterial, updateTVcontentType } from "../../store";
-import { MaterialTypes, TableHeightTypes, TVContentTypes } from "../../helpers/types";
+import { colors, state, updateEnvPreset, updateTableCoverColor, updateTableHeight, updateTableMaterial, updateTVcontentType } from "../../store";
+import { MaterialTypes, PresetsType, TableHeightTypes, TVContentTypes } from "../../helpers/types";
 import { useSnapshot } from "valtio";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { downloadScreenshot } from "../../helpers/utils";
@@ -28,6 +28,10 @@ export const Overlay = () => {
         downloadScreenshot(gl.domElement);
 
     }, []);
+
+    const handleEnv = useCallback((event: SelectChangeEvent) => {
+        updateEnvPreset(event.target.value as PresetsType);
+      }, []);
   
     return <>
         <div id="overlay">
@@ -75,6 +79,28 @@ export const Overlay = () => {
                             <MenuItem value={MaterialTypes.default}>default</MenuItem>
                             <MenuItem value={MaterialTypes.v1}>Wood 1</MenuItem>
                             <MenuItem value={MaterialTypes.v2}>Wood 2</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <FormControl variant="standard" style={{marginTop: '20px'}}>
+                        <InputLabel id="demo-simple-select-standard-label">Materials</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-standard-label"
+                            id="demo-simple-select-standard"
+                            defaultValue={PresetsType.city}
+                            onChange={handleEnv}
+                            label="Environment"
+                        >
+                            <MenuItem value={PresetsType.city}>{`${PresetsType.city}`}</MenuItem>
+                            <MenuItem value={PresetsType.apartment}>{`${PresetsType.apartment}`}</MenuItem>
+                            <MenuItem value={PresetsType.dawn}>{`${PresetsType.dawn}`}</MenuItem>
+                            <MenuItem value={PresetsType.forest}>{`${PresetsType.forest}`}</MenuItem>
+                            <MenuItem value={PresetsType.lobby}>{`${PresetsType.lobby}`}</MenuItem>
+                            <MenuItem value={PresetsType.night}>{`${PresetsType.night}`}</MenuItem>
+                            <MenuItem value={PresetsType.park}>{`${PresetsType.park}`}</MenuItem>
+                            <MenuItem value={PresetsType.studio}>{`${PresetsType.studio}`}</MenuItem>
+                            <MenuItem value={PresetsType.sunset}>{`${PresetsType.sunset}`}</MenuItem>
+                            <MenuItem value={PresetsType.warehouse}>{`${PresetsType.warehouse}`}</MenuItem>
+
                         </Select>
                     </FormControl>
                     <FormControl component="fieldset" sx={{marginTop: '10px'}}> 

@@ -16,10 +16,23 @@ export enum TVContentTypes {
     html = 'HTML',
     video = 'video',
 }
+export enum PresetsType {
+    apartment = "apartment",
+    city = "city",
+    dawn = "dawn",
+    forest = "forest",
+    lobby = "lobby",
+    night = "night",
+    park = "park",
+    studio = "studio",
+    sunset = "sunset",
+    warehouse = "warehouse"
+};
 
 export type StoreType = {
     tableHeight: TableHeightTypes
     tableCoverColor: string
     materials: MaterialTypes
     tvContent: TVContentTypes
+    envPresets: PresetsType
 }

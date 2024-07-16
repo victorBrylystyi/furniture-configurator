@@ -1,11 +1,14 @@
-import { OrbitControls, Stats } from "@react-three/drei";
+import { Html, OrbitControls, Stats, useProgress } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { CanvasScene } from "./components/CanvasScene";
 import { SceneEnv } from "./components/SceneEnv";
 import { Overlay } from "./components/Overlay";
-import { R3FStoreProvider } from "./store/R3FStore";
 
+function Loader() {
+  const { progress } = useProgress()
+  return <Html center>{progress} % loaded</Html>
+}
 
 const App = () => {
 
@@ -13,19 +16,22 @@ const App = () => {
 
   return <>
     <Canvas 
-      gl={{ preserveDrawingBuffer: true }} 
+      gl={{ 
+        // preserveDrawingBuffer: true,
+        antialias: false
+      }} 
       dpr={[1, 2]} 
       camera={{ position: [0, 2.5, 2.5], fov: 30 }}
     >
-      <OrbitControls target={[0,1,0]}  maxDistance={20} minDistance={2}/>
-      <R3FStoreProvider />
-      <CanvasScene />
-      <SceneEnv />
+      <OrbitControls target={[0, 1.2, 0]} maxDistance={20} minDistance={2} makeDefault />
+      <Suspense fallback={<Loader />}> 
+        <CanvasScene />
+        <SceneEnv />
+      </Suspense>
       <Stats showPanel={0} className="stats" parent={rootRef}/>
     </Canvas>
     <Overlay />
   </>
-
 
 }
 
