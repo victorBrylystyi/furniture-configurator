@@ -82,7 +82,7 @@ export const Overlay = () => {
                         </Select>
                     </FormControl>
                     <FormControl variant="standard" style={{marginTop: '20px'}}>
-                        <InputLabel id="demo-simple-select-standard-label">Materials</InputLabel>
+                        <InputLabel id="demo-simple-select-standard-label">Environment</InputLabel>
                         <Select
                             labelId="demo-simple-select-standard-label"
                             id="demo-simple-select-standard"
